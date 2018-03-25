@@ -67,7 +67,9 @@
 
     function doWebSocket() {
         var protocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-        ws = new WebSocket(protocol + '//' + location.host + '/ws');
+		var urlPath = location.pathname;
+		var dir = urlPath.substr(0, urlPath.lastIndexOf('/')+1);
+        ws = new WebSocket(protocol + '//' + location.host + dir + 'ws');
 
         ws.onopen = function () {
             var heartbeatTimer = setInterval(function () {
